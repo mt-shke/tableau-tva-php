@@ -1,3 +1,50 @@
+<?php 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "tableau";
+
+                $connection = new mysqli($servername, $username, $password, $database);
+              if ($connection->connect_error) {
+                die("Connection failed: " .$connection->connect_error);
+              }
+
+ if (isset($_POST['ajouter'])) {
+    $libelle = $_POST['libelle'];
+    $prix_ht = floatval($_POST['prix_ht']);
+    $tva = floatval($_POST['tva']);
+    $prix_ttc = $prix_ht * (1 + $tva / 100);
+    
+    $sql_insert = "INSERT INTO tableau (libelle, prix_ht, tva, prix_ttc) VALUES (?, ?, ?, ?)";
+    $stmt = $connection->prepare($sql_insert);
+    $stmt->bind_param("sddd", $libelle, $prix_ht, $tva, $prix_ttc);
+    $stmt->execute();
+    $nouveau_id = $connection->insert_id; // Récupère l'ID automatique
+    
+    // Redirection pour éviter double soumission
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+    
+}
+
+if (isset($_POST['enregistrer']) && isset($_POST['id_ligne'])) {
+    $id = intval($_POST['id_ligne']);
+    $libelle = trim($_POST['libelle']);
+    $prix_ht = floatval($_POST['prix_ht']);
+    $tva = floatval($_POST['tva']);
+    $prix_ttc = floatval($_POST['prix_ttc']);
+    
+    $sql = "UPDATE tableau SET libelle=?, prix_ht=?, tva=?, prix_ttc=? WHERE id=?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("sdddi", $libelle, $prix_ht, $tva, $prix_ttc, $id);
+    
+    if ($stmt->execute()) {
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -38,6 +85,7 @@
                <h2 class="tva">TVA</h2>
                <h2>Prix TTC</h2>
                <div>
+                  <span>Enregistrer</span>
                   <span>Calculer</span>
                   <span>Effacer</span>
                   <span>Supprimer</span>
@@ -46,58 +94,12 @@
             <hr class='hr-black hr'/>
             <ul class='ul-list'>
                 <?php 
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $database = "tableau";
-              
-                $connection = new mysqli($servername, $username, $password, $database);
-              if ($connection->connect_error) {
-                die("Connection failed: " .$connection->connect_error);
-              }
-     
-
               $sql = "SELECT * FROM tableau";
               $result = $connection->query($sql);
 
               if (!$result) {
                 die("Invalid query: " . $connection->error);
               }
-
-              if (isset($_POST['ajouter'])) {
-    $libelle = $_POST['libelle'];
-    $prix_ht = floatval($_POST['prix_ht']);
-    $tva = floatval($_POST['tva']);
-    $prix_ttc = $prix_ht * (1 + $tva / 100);
-    
-    $sql_insert = "INSERT INTO tableau (libelle, prix_ht, tva, prix_ttc) VALUES (?, ?, ?, ?)";
-    $stmt = $connection->prepare($sql_insert);
-    $stmt->bind_param("sddd", $libelle, $prix_ht, $tva, $prix_ttc);
-    $stmt->execute();
-    $nouveau_id = $connection->insert_id; // Récupère l'ID automatique
-    
-    // Redirection pour éviter double soumission
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-    
-}
-
-if (isset($_POST['enregistrer']) && isset($_POST['id_ligne'])) {
-    $id = intval($_POST['id_ligne']);
-    $libelle = trim($_POST['libelle']);
-    $prix_ht = floatval($_POST['prix_ht']);
-    $tva = floatval($_POST['tva']);
-    $prix_ttc = floatval($_POST['prix_ttc']);
-    
-    $sql = "UPDATE tableau SET libelle=?, prix_ht=?, tva=?, prix_ttc=? WHERE id=?";
-    $stmt = $connection->prepare($sql);
-    $stmt->bind_param("sdddi", $libelle, $prix_ht, $tva, $prix_ttc, $id);
-    
-    if ($stmt->execute()) {
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit();
-    }
-}
 
               while($row = $result->fetch_assoc()) 
                 echo "
@@ -115,13 +117,11 @@ if (isset($_POST['enregistrer']) && isset($_POST['id_ligne'])) {
                 <button type='submit' name='enregistrer' class='btn-dark btn-enregistrer'>Enregistrer</button>
                 <button type='button' class='btn-green btn-calculer'>Calculer</button>
                 <button type='reset' class='btn-yellow btn-effacer'>Effacer</button>
-                <a href='supprimer.php?id=" . $row['id'] . "' class='btn-red btn-supprimer' onclick='return confirm(\"Confirmer ?\")'>Supprimer</a>
+                <a href='supprimer.php?id=" . $row['id'] . "' class='btn-red btn-supprimer'>Supprimer</a>
             </div>
          </form>
       </li>
                 ";
-              
-
               ?>
 
    <form method="POST" class="ajout-form list line">

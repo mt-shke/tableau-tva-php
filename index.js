@@ -28,7 +28,7 @@ btnAjouter.addEventListener("click", () => {
        
         `;
    ulList.appendChild(li);
-   displayPopupAjouter();
+   displayPopup("popup-ajouter");
 });
 
 // BOUTONS TABLEAU
@@ -42,7 +42,7 @@ btnSupprimerLigne.addEventListener("click", () => {
    const lastElement = ulList.lastElementChild;
    if (lastElement) {
       lastElement.remove();
-      displayPopupSupprimer();
+      displayPopup("popup-supprimer");
    }
 });
 
@@ -51,7 +51,7 @@ btnEffacerLigne.addEventListener("click", () => {
    tousLesInputs.forEach((input) => {
       input.value = "";
    });
-   displayPopupEffacer();
+   displayPopup("popup-effacer");
 });
 
 // BOUTON LI
@@ -64,7 +64,7 @@ ulList.addEventListener("click", (e) => {
       // }
       // const liParent = e.target.closest("li"); //
       // liParent.remove();
-      // displayPopupSupprimer1();
+      // displayPopup("popup-supprimer-1");
       calculateTotal();
    }
 
@@ -72,14 +72,14 @@ ulList.addEventListener("click", (e) => {
       const li = e.target.closest("li");
       const inputsDuLi = li.querySelectorAll("input");
       inputsDuLi.forEach((input) => (input.value = ""));
-      displayPopupEffacer1();
+      displayPopup("popup-effacer-1");
       calculateTotal();
    }
 
    if (e.target.matches(".btn-calculer")) {
       const li = e.target.closest("li");
       const prixht = Number(li.querySelector(".prixht").value);
-      const tva = Number(li.querySelector(".tva").value.slice(0, -1));
+      const tva = li.querySelector(".tva").value;
       const taxe = (prixht * tva) / 100;
       const ttc = taxe + prixht;
       li.querySelector(".prixttc").value = ttc.toFixed(2);
@@ -93,7 +93,6 @@ const calculateTotal = () => {
    let somme = 0;
    prixttc.forEach((input, index) => {
       const valeur = parseFloat(input.value) || 0;
-      // console.log(`Input ${index}: "${input.value}" -> ${valeur}`);
       somme += valeur;
    });
    document.querySelector(".totalttc").value = somme.toFixed(2);
@@ -104,7 +103,7 @@ const calculateTotal = () => {
 ulList.addEventListener("input", (e) => {
    const li = e.target.closest("li");
    const prixht = Number(li.querySelector(".prixht").value);
-   const tva = Number(li.querySelector(".tva").value.slice(0, -1));
+   const tva = li.querySelector(".tva").value;
    const taxe = (prixht * tva) / 100;
    const ttc = taxe + prixht;
    li.querySelector(".prixttc").value = ttc.toFixed(2);
@@ -112,44 +111,11 @@ ulList.addEventListener("input", (e) => {
 });
 
 // POPUP
-
-const displayPopupAjouter = () => {
-   const elem = document.querySelector(".popup-ajouter");
-   elem.className = "popup popup-ajouter";
+const displayPopup = (popupName) => {
+   const elem = document.querySelector("." + popupName);
+   elem.className = `popup ${popupName}`;
    -setTimeout(() => {
-      elem.className = "popup popup-ajouter hidden";
-   }, 2000);
-};
-
-const displayPopupSupprimer = () => {
-   const elem = document.querySelector(".popup-supprimer");
-   elem.className = "popup popup-supprimer";
-   -setTimeout(() => {
-      elem.className = "popup popup-supprimer hidden";
-   }, 2000);
-};
-
-const displayPopupEffacer = () => {
-   const elem = document.querySelector(".popup-effacer");
-   elem.className = "popup popup-effacer";
-   -setTimeout(() => {
-      elem.className = "popup popup-effacer hidden";
-   }, 2000);
-};
-
-const displayPopupSupprimer1 = () => {
-   const elem = document.querySelector(".popup-supprimer-1");
-   elem.className = "popup popup-supprimer-1";
-   -setTimeout(() => {
-      elem.className = "popup popup-supprimer-1 hidden";
-   }, 2000);
-};
-
-const displayPopupEffacer1 = () => {
-   const elem = document.querySelector(".popup-effacer-1");
-   elem.className = "popup popup-effacer-1";
-   -setTimeout(() => {
-      elem.className = "popup popup-effacer-1 hidden";
+      elem.className = `popup ${popupName} hidden`;
    }, 2000);
 };
 

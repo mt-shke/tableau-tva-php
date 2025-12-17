@@ -152,6 +152,7 @@ a {
    text-decoration: none;
    padding: 0.5rem;
    text-align: center;
+   font-size: 0.8rem;
 }
 
 /* FOOTER  */
@@ -173,13 +174,15 @@ a {
 .btn-blue {
    background-color: rgb(3, 61, 252);
    color: white;
+   width: fit-content;
+   margin-inline: 1rem;
 }
 .btn-green {
    background-color: rgb(1, 173, 52);
    color: white;
 }
 .btn-yellow {
-   background-color: rgb(199, 199, 0);
+   background-color: rgb(212, 212, 3);
    color: black;
 }
 .btn-red {
