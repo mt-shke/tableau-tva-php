@@ -116,7 +116,7 @@ if (isset($_POST['enregistrer']) && isset($_POST['id_ligne'])) {
             <div class='list-button-container'>
                 <button type='submit' name='enregistrer' class='btn-dark btn-enregistrer'>Enregistrer</button>
                 <button type='button' class='btn-green btn-calculer'>Calculer</button>
-                <button type='reset' class='btn-yellow btn-effacer'>Effacer</button>
+                <button type='button' class='btn-yellow btn-effacer'>Effacer</button>
                 <a href='supprimer.php?id=" . $row['id'] . "' class='btn-red btn-supprimer'>Supprimer</a>
             </div>
          </form>
