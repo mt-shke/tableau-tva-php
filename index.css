@@ -1,0 +1,223 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   font-family: sans-serif;
+   min-width: 1200px;
+}
+
+/* HEADER  */
+
+header {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   text-align: center;
+   gap: 1rem;
+   padding: 1rem;
+}
+
+header ul {
+   display: flex;
+   margin: auto;
+   gap: 1rem;
+}
+
+ul {
+   list-style-type: none;
+}
+
+button {
+   padding: 0.3rem 0.5rem;
+   border-radius: 0.15rem;
+   border-color: transparent;
+}
+
+button:hover {
+   cursor: pointer;
+}
+
+/* MAIN */
+
+main {
+   display: flex;
+   flex: 1;
+   padding: 1rem;
+   flex-direction: column;
+}
+
+/* POPUP  */
+
+.popup {
+   display: block;
+   background-color: rgb(1, 204, 255);
+   text-align: center;
+   padding: 1rem;
+   margin-bottom: 1rem;
+}
+
+.hidden {
+   display: none;
+}
+
+/* DIV  */
+
+main div {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+}
+
+.title {
+   flex: 1;
+   display: grid;
+   grid-template-columns: 21% 21% 8% 20% 30%;
+   align-items: center;
+}
+
+.ul-list {
+   display: flex;
+   flex-direction: column;
+   gap: 0.4rem;
+   flex: 1;
+}
+
+.btn-title {
+   font-weight: bold;
+   background-color: transparent;
+}
+
+h2 {
+   font-weight: bold;
+   text-align: center;
+   font-size: 1rem;
+}
+
+.title div {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   border-bottom: 1px black;
+}
+
+span {
+   font-weight: bold;
+}
+
+hr {
+   margin-block: 0.5rem;
+   border: 1px solid rgba(128, 128, 128, 0.288);
+}
+.hr-black {
+   border: 1px solid black;
+}
+
+/* MAIN UL  */
+
+.list {
+   width: 100%;
+   margin-block: 0.2rem;
+   display: grid;
+   grid-template-columns: 21% 21% 8% 20% 30%;
+   align-items: center;
+}
+
+.list-button-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+}
+
+.border-list {
+   border: 1px solid rgba(133, 133, 133, 0.356);
+   border-radius: 4px;
+   padding: 0.2rem 0.4rem;
+   margin-inline: 0.3rem;
+}
+
+input {
+   outline: none;
+   border: none;
+   width: 100%;
+}
+
+a {
+   text-decoration: none;
+   padding: 0.5rem;
+   text-align: center;
+}
+
+/* FOOTER  */
+
+.total {
+   text-align: center;
+}
+
+/* BUTTON  */
+
+.btn-black {
+   background-color: black;
+   color: white;
+}
+.btn-dark {
+   background-color: rgb(44, 44, 44);
+   color: white;
+}
+.btn-blue {
+   background-color: rgb(3, 61, 252);
+   color: white;
+}
+.btn-green {
+   background-color: rgb(1, 173, 52);
+   color: white;
+}
+.btn-yellow {
+   background-color: rgb(199, 199, 0);
+   color: black;
+}
+.btn-red {
+   background-color: rgb(204, 0, 0);
+   color: white;
+}
+
+/* JSON  */
+
+.container-json {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   margin: auto;
+   gap: 2rem;
+   padding: 2rem;
+}
+
+.container-local {
+   display: flex;
+   gap: 1rem;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+}
+
+.btn-save-json {
+   background-color: rgb(1, 145, 145);
+}
+.btn-load-json {
+   background-color: rgb(0, 255, 13);
+}
+.btn-save-local {
+   background-color: rgb(0, 114, 114);
+   width: min-content;
+}
+.btn-load-local {
+   background-color: rgb(0, 161, 8);
+   width: min-content;
+}
