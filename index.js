@@ -58,13 +58,13 @@ btnEffacerLigne.addEventListener("click", () => {
 
 ulList.addEventListener("click", (e) => {
    if (e.target.matches(".btn-supprimer")) {
-      const lis = Array.from(ulList.children)[1];
-      if (!lis) {
-         return;
-      }
-      const liParent = e.target.closest("li"); //
-      liParent.remove();
-      displayPopupSupprimer1();
+      // const lis = Array.from(ulList.children)[1];
+      // if (!lis) {
+      //    return;
+      // }
+      // const liParent = e.target.closest("li"); //
+      // liParent.remove();
+      // displayPopupSupprimer1();
       calculateTotal();
    }
 

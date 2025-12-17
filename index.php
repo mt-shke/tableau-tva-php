@@ -15,10 +15,10 @@
          <h1>Tableau TVA</h1>
          <ul>
             <li>
-               <button disable class='btn-black btn-ajouter'>Ajouter une ligne</button>
+               <button disabled class='btn-black btn-ajouter'>Ajouter une ligne</button>
             </li>
             <li>
-               <button class='btn-yellow btn-supprimer-ligne'>Supprimer la ligne</button>
+               <button disabled class='btn-yellow btn-supprimer-ligne'>Supprimer la ligne</button>
             </li>
             <li>
                <button class='btn-red btn-effacer-ligne'>Effacer les champs</button>
@@ -101,8 +101,8 @@ if (isset($_POST['enregistrer']) && isset($_POST['id_ligne'])) {
 
               while($row = $result->fetch_assoc()) 
                 echo "
-                   <li class='' data-id='" . $row['id'] . "'>
-        <form method='POST' class='form-ligne list'>
+      <li class='' data-id='" . $row['id'] . "'>
+         <form method='POST' class='form-ligne list'>
             <input type='hidden' name='id_ligne' value='" . $row['id'] . "'>
             <label class='border-list'><input name='libelle' placeholder='libellé' value='" . htmlspecialchars($row['libelle']) . "' required></label>
             <label class='border-list'><input type='number' step='0.01' name='prix_ht' class='prixht' placeholder='prix HT' value='" . $row['prix_ht'] . "' required></label>
@@ -117,14 +117,14 @@ if (isset($_POST['enregistrer']) && isset($_POST['id_ligne'])) {
                 <button type='reset' class='btn-yellow btn-effacer'>Effacer</button>
                 <a href='supprimer.php?id=" . $row['id'] . "' class='btn-red btn-supprimer' onclick='return confirm(\"Confirmer ?\")'>Supprimer</a>
             </div>
-        </form>
-    </li>
+         </form>
+      </li>
                 ";
               
 
               ?>
 
-              <form method="POST" class="ajout-form list line">
+   <form method="POST" class="ajout-form list line">
                <label>
     <input type="text" name="libelle" placeholder="Nouveau libellé" required> </label>
     <label><input type="number" step="0.01" name="prix_ht" placeholder="Prix HT" required></label>
@@ -133,7 +133,7 @@ if (isset($_POST['enregistrer']) && isset($_POST['id_ligne'])) {
         <option value="5.5">5.5%</option>
     </select>
     <button type="submit" name="ajouter" class="btn-blue">Ajouter</button>
-</form>
+   </form>
              
             
             </ul>
